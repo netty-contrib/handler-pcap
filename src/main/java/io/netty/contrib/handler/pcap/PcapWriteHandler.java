@@ -129,44 +129,6 @@ public final class PcapWriteHandler implements ChannelHandler, Closeable {
      */
     private boolean initialized;
 
-    /**
-     * Create new {@link PcapWriteHandler} Instance.
-     * {@code captureZeroByte} is set to {@code false} and
-     * {@code writePcapGlobalHeader} is set to {@code true}.
-     *
-     * @param outputStream OutputStream where Pcap data will be written. Call {@link #close()} to close this
-     *                     OutputStream.
-     * @throws NullPointerException If {@link OutputStream} is {@code null} then we'll throw an
-     *                              {@link NullPointerException}
-     * @deprecated Use {@link #builder() builder} instead.
-     */
-    @Deprecated
-    public PcapWriteHandler(OutputStream outputStream) {
-        this(outputStream, false, true);
-    }
-
-    /**
-     * Create new {@link PcapWriteHandler} Instance
-     *
-     * @param outputStream          OutputStream where Pcap data will be written. Call {@link #close()} to close this
-     *                              OutputStream.
-     * @param captureZeroByte       Set to {@code true} to enable capturing packets with empty (0 bytes) payload.
-     *                              Otherwise, if set to {@code false}, empty packets will be filtered out.
-     * @param writePcapGlobalHeader Set to {@code true} to write Pcap Global Header on initialization.
-     *                              Otherwise, if set to {@code false}, Pcap Global Header will not be written
-     *                              on initialization. This could when writing Pcap data on a existing file where
-     *                              Pcap Global Header is already present.
-     * @throws NullPointerException If {@link OutputStream} is {@code null} then we'll throw an
-     *                              {@link NullPointerException}
-     * @deprecated Use {@link #builder() builder} instead.
-     */
-    @Deprecated
-    public PcapWriteHandler(OutputStream outputStream, boolean captureZeroByte, boolean writePcapGlobalHeader) {
-        this.outputStream = Objects.requireNonNull(outputStream, "OutputStream");
-        this.captureZeroByte = captureZeroByte;
-        this.writePcapGlobalHeader = writePcapGlobalHeader;
-    }
-
     private PcapWriteHandler(Builder builder, OutputStream outputStream) {
         this.outputStream = outputStream;
         this.captureZeroByte = builder.captureZeroByte;
